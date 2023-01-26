@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>MIS Explore</title>
+        <link rel="stylesheet" th:href="@{/css/templatemo-video-catalog.css}">
+        <link rel="stylesheet" th:href="@{/css/custom.css}">
+        <link rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+                }
+            }
+
+            .b-example-divider {
+                height: 3rem;
+                background-color: rgba(0, 0, 0, .1);
+                border: solid rgba(0, 0, 0, .15);
+                border-width: 1px 0;
+                box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+            }
+
+            .b-example-vr {
+                flex-shrink: 0;
+                width: 1.5rem;
+                height: 100vh;
+            }
+
+            .bi {
+                vertical-align: -.125em;
+                fill: currentColor;
+            }
+
+            .nav-scroller {
+                position: relative;
+                z-index: 2;
+                height: 2.75rem;
+                overflow-y: hidden;
+            }
+
+            .nav-scroller .nav {
+                display: flex;
+                flex-wrap: nowrap;
+                padding-bottom: 1rem;
+                margin-top: -1px;
+                overflow-x: auto;
+                text-align: center;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-font{
+                font-size: 16px !important;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="navbar-inverse">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="navbar-header">
+                            <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                            <a href="/MIS-TALKS/home" class="navbar-brand">MIS TALKS</a>
+                        </div>
+                        <div class="navbar-collapse collapse" id="mobile_menu">
+                            <ul class="nav navbar-nav nav-font">
+                                <li><a href="/MIS-TALKS/home">Home</a></li>
+                                <li class="active"><a href="#">Explore</a></li>
+                                <li><a href="#">Services</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="/MIS-TALKS/contact-us">Contact Us</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <form action="/MIS-TALKS/search" method="GET" class="navbar-form margin0-top3">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="d-inline-flex p-2">
+                                                    <input type="search" name="headLine" id="" placeholder="Search Anything Here..." class="form-control">
+                                                    <button type="submit" class="input-group-addon" style="padding:0px"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li th:if="${login_status != null}">
+                                    <a href="/MIS-TALKS/profile"><span class="glyphicon glyphicon-user"></span> Profile</a>
+                                </li>
+                                <li th:unless="${login_status != null}">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="glyphicon glyphicon-log-in"></span>
+                                        Login / Sign Up 
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/MIS-TALKS/login">Login</a></li>
+                                        <li><a href="/MIS-TALKS/signup">Signup</a></li>
+                                    </ul>
+                                </li>
+                                <li th:if="${login_status != null}">
+                                    <a href="logout">
+                                        <span class="glyphicon glyphicon-log-in"></span>
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="tm-page-wrap mx-auto">
+                <div class="position-relative">
+                    <div class="position-absolute tm-site-header">
+                        <div class="container-fluid position-relative">
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tm-welcome-container text-center text-white">
+                        <div class="tm-welcome-container-inner">
+                            <p class="tm-welcome-text mb-1 text-white"></p>
+                            <p class="tm-welcome-text mb-5 text-white"></p>
+                            <a href="#content" class="btn tm-btn-animate tm-btn-cta tm-icon-down">
+                                <span>Discover</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="tm-video-container">
+                        <video autoplay muted loop id="tm-video">
+                            <source th:src="@{/video/Y2Mate.is.mp4}" type="video/mp4">
+                        </video>    
+                    </div>
+                    
+                    <i id="tm-video-control-button" class="fas fa-pause"></i>
+                </div>
+
+                <div class="container-fluid">
+                    <div id="content" class="mx-auto tm-content-container">
+                        <main>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="tm-categories-container mb-5">
+                                        <h3 class="tm-text-primary tm-categories-text">Categories:</h3>
+                                        <ul class="nav tm-category-list">
+                                            <li class="nav-item tm-category-item"><a href="/MIS-TALKS/explore/category/all" th:class="'nav-link tm-category-link '  + ${all}">All</a></li>
+                                            <li class="nav-item tm-category-item"><a href="/MIS-TALKS/explore/category/tech" th:class="'nav-link tm-category-link ' + ${tech}">Technology</a></li>
+                                            <li class="nav-item tm-category-item"><a href="/MIS-TALKS/explore/category/science" th:class="'nav-link tm-category-link ' + ${science}">Science</a></li>
+                                            <li class="nav-item tm-category-item"><a href="/MIS-TALKS/explore/category/art" th:class="'nav-link tm-category-link ' + ${art}">Art</a></li>
+                                            <li class="nav-item tm-category-item"><a href="/MIS-TALKS/explore/category/sport" th:class="'nav-link tm-category-link ' + ${sport}">Sport</a></li>
+                                        </ul>
+                                    </div>        
+                                </div>
+                            </div>
+                            
+                            <div class="row tm-catalog-item-list">
+                                <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item" th:each="videoInfo: ${videos_info}">
+                                    <div class="position-relative tm-thumbnail-container">
+                                        <img src="https://tedxwinterpark.com/wp-content/uploads/2021/02/tedx.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
+                                        <a th:href="${videoInfo.url}" class="position-absolute tm-img-overlay">
+                                            <i class="fas fa-play tm-overlay-icon"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-4 tm-bg-gray tm-catalog-item-description">
+                                        <h3 class="tm-text-primary mb-3 tm-catalog-item-title">[[${videoInfo.headLine}]]</h3>
+                                        <p class="tm-catalog-item-text">[[${videoInfo.description}]]</p>
+                                    </div>
+                                    <div class="p-4 tm-bg-gray" style="display:flex; flex-direction:row; justify-content:space-between; padding-bottom: 0px !important; height:fit-content !important;">
+                                        <p class="tm-catalog-item-text">Speaker: [[${videoInfo.speaker}]]</p>
+                                        <p class="tm-catalog-item-text">Duration: [[${videoInfo.duration}]]</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display:flex; flex-direction:row; justify-content:center;">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item">
+                                        <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/MIS-TALKS/explore/category/' + ${category} + '/page/' + ${currentPage - 1}}" tabindex="-1">Previous</a>
+                                    </li>
+                                    <li class="page-item" th:if="${currentPage <= 5}" th:each="i: ${#numbers.sequence(1, currentPage)}">
+                                        <a class="page-link" th:if="${currentPage != i}" th:href="@{'/MIS-TALKS/explore/category/' + ${category} + '/page/' + ${i}}">[[${i}]]</a>
+                                        <a class="page-link active" th:unless="${currentPage != i}">[[${i}]]</a>
+                                    </li>
+                                    <li class="page-item" th:unless="${currentPage <= 5}" th:each="i: ${#numbers.sequence(currentPage - 5, currentPage)}">
+                                        <a class="page-link" th:if="${currentPage != i}" th:href="@{'/MIS-TALKS/explore/category/' + ${category} + '/page/' + ${i}}">[[${i}]]</a>
+                                        <a class="page-link active" th:unless="${currentPage != i}">[[${i}]]</a>
+                                    </li>
+                                    <li class="page-item" th:if="${currentPage + 5 < totalPages}"
+                                        th:each="i: ${#numbers.sequence(currentPage + 1, currentPage + 5)}">
+                                        <a class="page-link" th:if="${currentPage != i}" th:href="@{'/MIS-TALKS/explore/category/' + ${category} + '/page/'+ ${i}}">[[${i}]]</a>
+                                        <a class="page-link active" th:unless="${currentPage != i}">[[${i}]]</a>
+                                    </li>
+                                    <li class="page-item" th:unless="${currentPage + 5 < totalPages}"
+                                        th:each="i: ${#numbers.sequence(currentPage + 1, totalPages)}">
+                                        <a class="page-link" th:if="${currentPage != i}" th:href="@{'/MIS-TALKS/explore/category/' + ${category} + '/page/' + ${i}}">[[${i}]]</a>
+                                        <a class="page-link active" th:unless="${currentPage != i}">[[${i}]]</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/MIS-TALKS/explore/category/' + ${category} + '/page/' + ${currentPage + 1}}">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </main>
+
+                        <div class="row mt-5 pt-3">
+                            <div class="col-xl-6 col-lg-12 mb-4">
+                                <div class="tm-bg-gray p-5 h-100">
+                                    <h3 class="tm-text-primary mb-3">Do you want to get our latest updates?</h3>
+                                    <p class="mb-5">Please subscribe our newsletter for upcoming new videos and latest information about our
+                                        work. Thank you.</p>
+                                    <form action="/MIS-TALKS/email/subscribe" method="POST" class="tm-subscribe-form">
+                                        <input type="text" id="email" name="email" placeholder="Your Email..." required>
+                                        <button type="submit" class="btn rounded-0 btn-primary tm-btn-small">Subscribe</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+        </footer>
+        <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script async src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script>
+        <script>
+            function setVideoSize() {
+                const vidWidth = 1920;
+                const vidHeight = 1080;
+                let windowWidth = window.innerWidth;
+                let newVidWidth = windowWidth;
+                let newVidHeight = windowWidth * vidHeight / vidWidth;
+                let marginLeft = 0;
+                let marginTop = 0;
+
+                if (newVidHeight < 500) {
+                    newVidHeight = 500;
+                    newVidWidth = newVidHeight * vidWidth / vidHeight;
+                }
+
+                if(newVidWidth > windowWidth) {
+                    marginLeft = -((newVidWidth - windowWidth) / 2);
+                }
+
+                if(newVidHeight > 720) {
+                    marginTop = -((newVidHeight - $('#tm-video-container').height()) / 2);
+                }
+
+                const tmVideo = $('#tm-video');
+
+                tmVideo.css('width', newVidWidth);
+                tmVideo.css('height', newVidHeight);
+                tmVideo.css('margin-left', marginLeft);
+                tmVideo.css('margin-top', marginTop);
+            }
+
+            $(document).ready(function () {
+                /************** Video background *********/
+
+                setVideoSize();
+
+                // Set video background size based on window size
+                let timeout;
+                window.onresize = function () {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(setVideoSize, 100);
+                };
+
+                // Play/Pause button for video background      
+                const btn = $("#tm-video-control-button");
+
+                btn.on("click", function (e) {
+                    const video = document.getElementById("tm-video");
+                    $(this).removeClass();
+
+                    if (video.paused) {
+                        video.play();
+                        $(this).addClass("fas fa-pause");
+                    } else {
+                        video.pause();
+                        $(this).addClass("fas fa-play");
+                    }
+                });
+            })
+        </script>
+    </body>
+</html>

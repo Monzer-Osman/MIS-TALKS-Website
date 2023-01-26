@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <link rel="stylesheet" th:href="@{/css/custom.css}">
+        <link rel="stylesheet" th:href="@{/css/profile.css}">
+        <link rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse" style="margin: 0px;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="navbar-header">
+                            <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                            <a href="/MIS-TALKS/home" class="navbar-brand">MIS TALKS</a>
+                        </div>
+                        <div class="navbar-collapse collapse" id="mobile_menu" >
+                            <ul class="nav navbar-nav nav-font">
+                                <li><a href="/MIS-TALKS/home">Home</a></li>
+                                <li><a href="/MIS-TALKS/explore">Explore</a></li>
+                                <li><a href="#">Services</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="/MIS-TALKS/contact-us">Contact Us</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <form action="/MIS-TALKS/search" method="GET" class="navbar-form margin0-top3">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="d-inline-flex p-2">
+                                                    <input type="search" name="headLine" id="" placeholder="Search Anything Here..." class="form-control">
+                                                    <button type="submit" class="input-group-addon" style="padding:0px"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+    
+                            <ul class="nav navbar-nav navbar-right">
+                                <li th:if="${login_status} != null" class="active"><a href="#" class="active"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                                <li th:unless="${login_status} != null"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/MIS-TALKS/signin">Login</a></li>
+                                        <li><a href="/MIS-TALKS/signup">Sign Up</a></li>
+                                    </ul>
+                                </li>
+                                <li th:if="${login_status != null}">
+                                    <a href="/MIS-TALKS/logout">
+                                        <span class="glyphicon glyphicon-log-in"></span>
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </header>
+        <main class="main-class">
+        <div class="container emp-profile">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img height="70px" width="70px" src="data:image/png;base64,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" alt=""/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5 th:text="${full_name}">
+                                        Full Name
+                                    </h5>
+                                    <h6>
+                                        Joined since [[${joinDate}]]
+                                    </h6>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Info</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+                    <div class="col-md-9">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane show" id="home" role="tabpanel" aria-labelledby="home-tab" style="margin-left: 50%; margin-right:0px;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>User Id</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>uidmis00[[${user_id}]]</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>First Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>[[${firstname}]]</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Last Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>[[${lastname}]]</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>[[${email}]]</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Phone</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>[[${phone}]]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </main>
+        <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Monzer Osman">
+        <meta name="generator" content="Hugo 0.104.2">
+        <title>MIS-Talks Home</title>
+        <link th:href="@{/css/custom.css}" rel="stylesheet">
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/masonry/">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">    
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+                }
+            }
+
+            .b-example-divider {
+                height: 3rem;
+                background-color: rgba(0, 0, 0, .1);
+                border: solid rgba(0, 0, 0, .15);
+                border-width: 1px 0;
+                box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+            }
+
+            .b-example-vr {
+                flex-shrink: 0;
+                width: 1.5rem;
+                height: 100vh;
+            }
+
+            .bi {
+                vertical-align: -.125em;
+                fill: currentColor;
+            }
+
+            .nav-scroller {
+                position: relative;
+                z-index: 2;
+                height: 2.75rem;
+                overflow-y: hidden;
+            }
+
+            .nav-scroller .nav {
+                display: flex;
+                flex-wrap: nowrap;
+                padding-bottom: 1rem;
+                margin-top: -1px;
+                overflow-x: auto;
+                text-align: center;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-font{
+                font-size: 16px !important;
+            }
+        </style>
+    </head> 
+    <body>
+        <header>
+            <div class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="navbar-header">
+                                <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                                <a href="#" class="navbar-brand">MIS TALKS</a>
+                            </div>
+                            <div class="navbar-collapse collapse" id="mobile_menu" >
+                                <ul class="nav navbar-nav nav-font">
+                                    <li class="active"><a href="#">Home</a></li>
+                                    <li><a href="/MIS-TALKS/explore">Explore</a></li>
+                                    <li><a href="#">Services</a></li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="/MIS-TALKS/contact-us">Contact Us</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav">
+                                    <li>
+                                        <form action="/MIS-TALKS/search" method="GET" class="navbar-form margin0-top3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="d-inline-flex p-2">
+                                                        <input type="search" name="headLine" id="" placeholder="Search Anything Here..." class="form-control">
+                                                        <button type="submit" class="input-group-addon" style="padding:0px"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </li>
+                                </ul>
+
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li th:if="${login_status != null}"><a href="/MIS-TALKS/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                                    <li th:unless="${login_status != null}"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login / Signup <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/MIS-TALKS/login">Login</a></li>
+                                            <li><a href="/MIS-TALKS/signup">Signup</a></li>
+                                        </ul>
+                                    </li>
+                                    <li th:if="${login_status != null}">
+                                        <a href="/MIS-TALKS/logout">
+                                            <span class="glyphicon glyphicon-log-in"></span>
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="container py-5">
+            <h1>MIS-TALKS</h1>
+            <p class="lead">Welcome to the world of knowledge ...</p>
+
+            <pre>
+                MIS-TALKS is where you can expand you world by watching other people ideas, knowledge & experiences
+                mis-talks contains huge collection videos that contain so much knowledge and fun! in the same time
+                so lets discover what we got here ...
+            </pre>
+
+            <hr class="my-5">
+
+            <div class="row" data-masonry='{"percentPosition": true }'>
+                <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="https://page-builder.ted.com/system/baubles/files/000/009/934/original/help_improve_TED_%283%29.jpg" />
+
+                    <div class="card-body">
+                    <h5 class="card-title">We want to solve your work problem!</h5>
+                    <p class="card-text">You could get advice on your workplace issue from the hosts of our new podcast Fixable. Submit your issue to professional development coaches Anne Morriss and Frances Frei below!</p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card p-3">
+                    <figure class="p-3 mb-0">
+                    <blockquote class="blockquote">
+                        <p>"Spread love everywhere you go. Let no one ever come to you without leaving happier.".</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer mb-0 text-muted">
+                        By Mother Teresa <cite title="Source Title"></cite>
+                    </figcaption>
+                    </figure>
+                </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/dd2c601c-2509-49f2-ac7e-a214552e58d1/RobertWaldinger_2022H-embed.jpg?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0.03&quality=80&w=1920"/>
+
+                    <div class="card-body">
+                    <h5 class="card-title">The secret to a happy life</h5>
+                    <p class="card-text">In this special TED Membership interview, psychiatrist Robert Waldinger, the head of one of the longest-running studies of adult life ever conducted, shares insights into how to identify and strengthen the relationships that impact your well-being most</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card text-bg-primary text-center p-3" style="background-color: #EEE;">
+                    <figure class="mb-0">
+                    <blockquote class="blockquote">
+                        <p>“Most people fail in life not because they aim too high and miss, but because they aim too low and hit.”</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer mb-0 text-muted">
+                        By Les Brown <cite title="Source Title"></cite>
+                    </figcaption>
+                    </figure>
+                </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">Whatever you want to do in your life ladies and gentleman it must be in your part a willingness to do what is required!</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img class="bd-placeholder-img card-img" width="100%" height="260" src="https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/733bf016-c407-4293-88dc-05e4f7d4ca72/04_TED-Interview_S3_Talk-page_Michael-Tubbs_2880x1620.jpg?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0.03&quality=80&w=640" />
+                </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card p-3 text-end">
+                    <figure class="mb-0">
+                    <blockquote class="blockquote">
+                        <p>"Don't judge each day by the harvest you reap but by the seeds that you plant."</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer mb-0 text-muted">
+                        By Robert Louis Stevenson<cite title="Source Title"></cite>
+                    </figcaption>
+                    </figure>
+                </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-4">
+                <div class="card" style="background-color: #EEE;">
+                    <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </main>
+    <footer>
+    </footer>
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script async src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script>
+    </body>
+</html>
