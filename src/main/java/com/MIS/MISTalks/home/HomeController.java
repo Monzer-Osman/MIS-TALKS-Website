@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/MIS-TALKS")
+@RequestMapping("")
 @SessionAttributes("{sessionId}")
 public class HomeController {
     private Logger log = LoggerFactory.getLogger(HomeController.class);
 
-    @GetMapping("/home")
+    @GetMapping("")
     public String getHomePage(HttpSession httpSession, Model model) {
         log.info("--getHomePage() function");
         try {
