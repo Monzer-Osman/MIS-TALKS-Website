@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/MIS-TALKS/explore")
@@ -18,28 +22,29 @@ import javax.servlet.http.HttpSession;
 public class ExploreController {
     private final int PAGE_SIZE = 18;
     private final Logger log = LoggerFactory.getLogger(ExploreController.class);
-    private ExploreService exploreService;
+    private final ExploreService exploreService;
 
     @Autowired
-    public ExploreController(ExploreService exploreService){
+    public ExploreController(ExploreService exploreService) {
         this.exploreService = exploreService;
     }
 
     @GetMapping("")
-    public String getExplore(Model model, HttpSession httpSession){
+    public String getExplore(Model model, HttpSession httpSession) {
         try {
             log.info("getExplore() function");
             return getExplorePage("all", 1, model, httpSession);
-        }  catch (Exception e) {
+        } catch (Exception e) {
             log.info(e.getMessage());
             return "serverErrorPage";
         }
     }
 
     @GetMapping("/category/{category}")
-    public String getExplorePage(@PathVariable String category, Model model, HttpSession httpSession) {
+    public String getExplorePage(@PathVariable String category,
+                                 Model model,
+                                 HttpSession httpSession) {
         log.info("getExplorePage() function");
-        log.info("category " + category);
         try {
             return getExplorePage(category, 1, model, httpSession);
         } catch (Exception e) {
@@ -50,18 +55,28 @@ public class ExploreController {
     }
 
     @GetMapping("/category/{category}/page/{pageNumber}")
-    public String getExplorePage(@PathVariable String category, @PathVariable int pageNumber, Model model, HttpSession httpSession){
+    public String getExplorePage(@PathVariable String category,
+                                 @PathVariable int pageNumber,
+                                 Model model,
+                                 HttpSession httpSession) {
         log.info("--getExplorePage() function");
         try {
+            if(category.toString().equals("null")){
+                return "redirect:/MIS-TALKS/explore/category/all/page/"+pageNumber;
+            }
             initializeModel(model, httpSession, category, pageNumber);
             return "explore";
-        }  catch (Exception e) {
+        } catch (Exception e) {
             log.info("error encountered");
             log.info("Error Message : " + e.getMessage());
             return "serverErrorPage";
         }
     }
-    private void initializeModel(Model model, HttpSession httpSession, String category, int pageNumber) throws Exception{
+
+    private void initializeModel(Model model,
+                                 HttpSession httpSession,
+                                 String category,
+                                 int pageNumber) throws Exception {
         log.info("--initializeModel() function");
         Page<VideoInfo> page = exploreService.getVideosForPage(pageNumber, category, PAGE_SIZE);
         model.addAttribute("currentPage", pageNumber);

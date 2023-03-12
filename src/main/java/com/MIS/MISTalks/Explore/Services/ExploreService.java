@@ -13,35 +13,32 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExploreService {
     private final Logger LOG = LoggerFactory.getLogger(ExploreService.class);
-    private VideoInfoRepository videoInfoRepository;
+    private final VideoInfoRepository videoInfoRepository;
 
     @Autowired
-    public ExploreService(VideoInfoRepository videoInfoRepository){
+    public ExploreService(VideoInfoRepository videoInfoRepository) {
         this.videoInfoRepository = videoInfoRepository;
     }
 
-    public void addNewVideo(VideoInfo videoInfo){
+    public void addNewVideo(VideoInfo videoInfo) {
         videoInfoRepository.save(videoInfo);
     }
 
-    public Page<VideoInfo> getVideosForPage(Integer pageNumber, Integer pageSize) throws Exception{
+
+    public Page<VideoInfo> getVideosForPage(Integer pageNumber, String category, Integer pageSize) throws Exception {
         LOG.info("--getVideosForPage() function");
-        Pageable pageable = PageRequest.of(pageNumber-1, pageSize);
-        return videoInfoRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+        if ("all".equals(category)) {
+            return videoInfoRepository.findAll(pageable);
+        } else {
+            return videoInfoRepository.findAllByName(category, pageable);
+        }
     }
 
-    public Page<VideoInfo> getVideosForPage(Integer pageNumber, String category, Integer pageSize) throws Exception{
-        LOG.info("--getVideosForPage() function");
-        Pageable pageable = PageRequest.of(pageNumber-1, pageSize);
-        return videoInfoRepository.findAllByName(category, pageable);
-    }
-
-    public Page<VideoInfo> getVideosSimilarTo(String headTitle, Integer pageNumber, Integer pageSize) throws Exception{
+    public Page<VideoInfo> getVideosSimilarTo(String headTitle, Integer pageNumber, Integer pageSize) throws Exception {
         LOG.info("--getVideosSimilarTo() function");
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
         return videoInfoRepository.findAllByName(headTitle.toLowerCase(), pageable);
     }
-
-
 
 }

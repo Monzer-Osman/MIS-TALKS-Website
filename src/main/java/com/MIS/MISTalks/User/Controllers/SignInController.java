@@ -36,7 +36,7 @@ public class SignInController {
             String page = loginService.checkUserCredential(data.email(), data.password());
             if (page.equalsIgnoreCase("home")) {
                 sessionId.setAttribute("sessionId", data.email());
-                return "redirect:/MIS-TALKS/home";
+                return "redirect:/";
             } else {
                 return "redirect:/MIS-TALKS/login";
             }
